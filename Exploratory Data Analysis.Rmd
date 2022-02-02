@@ -80,11 +80,27 @@ head(state.x77)
 ```
 
 ```{r }
-# START YOUR CODE FROM HERE
+{
+  pdf(file="Income_Illiteracy.pdf", width=10, height=15)
+  state.x77 <- transform(state.x77, Region = factor(state.region))
+  xyplot(Income ~ Illiteracy | Region, data=state.x77,
+       layout=c(length(levels(state.region)), 1))
+  dev.off()
+}
+
 ```
 
 
 ```{r }
+
+state.x77 <- transform(state.x77, Region = factor(state.region))
+xyplot(Population ~ Life.Exp | Region, data=state.x77,
+       layout=c(length(levels(state.region)), 1),
+       xlab=list(label="Life Expectancy", fontsize=14),
+       ylab=list(label="Population", fontsize=14),
+       scales=list(cex=c(0.85, 0.85), # increase font size
+                   alternating=1,   # axes labels left/bottom 
+                   tck = c(1,0)))
 
 ```
 
@@ -98,7 +114,7 @@ head(state.x77)
 
 
 ```{r }
-head(women)
+# head(women)
 ```
 
 ```{r }
