@@ -81,10 +81,11 @@ head(state.x77)
 
 ```{r }
 {
-  pdf(file="Income_Illiteracy.pdf", width=10, height=15)
+  pdf(paste('Income_Illiteracy.pdf',sep = ''), width=8, height=4)
   state.x77 <- transform(state.x77, Region = factor(state.region))
-  xyplot(Income ~ Illiteracy | Region, data=state.x77,
-       layout=c(length(levels(state.region)), 1))
+  print(xyplot(Income ~ Illiteracy | Region, data=state.x77,
+       layout=c(length(levels(state.region)), 1)), xlab=list(label="Illiteracyy", fontsize=14),
+     ylab=list(label="Income", fontsize=14),)
   dev.off()
 }
 
@@ -93,15 +94,18 @@ head(state.x77)
 
 ```{r }
 
-state.x77 <- transform(state.x77, Region = factor(state.region))
-xyplot(Population ~ Life.Exp | Region, data=state.x77,
-       layout=c(length(levels(state.region)), 1),
-       xlab=list(label="Life Expectancy", fontsize=14),
-       ylab=list(label="Population", fontsize=14),
-       scales=list(cex=c(0.85, 0.85), # increase font size
-                   alternating=1,   # axes labels left/bottom 
-                   tck = c(1,0)))
-
+{
+  pdf(file="Population_LifeExpectancy.pdf", width=8, height=4)
+  state.x77 <- transform(state.x77, Region = factor(state.region))
+  print(xyplot(Population ~ Life.Exp | Region, data=state.x77,
+     layout=c(length(levels(state.region)), 1),
+     xlab=list(label="Life Expectancy", fontsize=14),
+     ylab=list(label="Population", fontsize=14),
+     scales=list(cex=c(0.85, 0.85), # increase font size
+                 alternating=1,   # axes labels left/bottom 
+                 tck = c(1,0))))
+  dev.off()
+}
 ```
 
 
@@ -114,11 +118,27 @@ xyplot(Population ~ Life.Exp | Region, data=state.x77,
 
 
 ```{r }
-# head(women)
+head(women)
 ```
 
 ```{r }
-# START YOUR CODE FROM HERE
+
+{
+  pdf(file="Women_height_weight.pdf", width=8, height = 4)
+  r_line <- lm(height ~ weight, data=women)
+  
+  p <- xyplot(height ~ weight, data=women, xlab=list(label="Weight (Pounds)", fontsize=14),
+     ylab=list(label="Height (Inches)", fontsize=14),  
+     panel = function(x, y) 
+       {
+          panel.xyplot(x, y, col="red")
+          panel.abline(r_line, lwd=2, col='blue')
+       })
+  print(p)
+  dev.off()
+}
+#### There is a perfect linear relation between height and weight
+p
 ```
 
 ```{r }
