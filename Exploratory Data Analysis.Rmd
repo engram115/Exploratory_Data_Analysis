@@ -1,7 +1,7 @@
 ---
 title: "Exploratory Data Analysis"
-author: "Sana Rasheed"
-date: "October 20, 2020"
+author: "Abdul Majid"
+date: "February 3, 2022"
 output: html_document
 ---
 
@@ -27,11 +27,31 @@ head(airquality)
 ```
 
 ```{r }
-# START YOUR CODE FROM HERE
+summary(airquality)
 ```
 
 
 ```{r }
+
+{
+  hist(airquality$Temp, breaks=40, col="green", border = "blue", main="Histogram of Temperature", xlab="Temperature", ylab="Frequency", density = 90)
+  abline(h=5)
+  rug(airquality$Temp, side = 1, col="red")
+}
+
+```
+```{r }
+
+{
+  boxplot(airquality$Wind, col='orange', xlab = "Wind", ylab = "Frequency", main = "Wind data distribution")
+  abline(h=mean(airquality$Wind), col='blue')
+}
+
+```
+```{r }
+data <- airquality
+plot(data$Solar.R, data$Ozone, xlab = "Ozone", ylab="Solar.R", pch=19, col='red')
+
 
 ```
 
