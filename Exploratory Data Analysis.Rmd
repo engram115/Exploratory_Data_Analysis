@@ -166,21 +166,33 @@ You need to use ggplot2 to accomplish this task.
 
 ```{r }
 head(longley)
+str(longley)
+```
+
+```{r }
+library(ggplot2)
+gg <- ggplot(longley, aes(Unemployed, GNP))
+gg_plt <- gg + geom_point()
+print(gg_plt)
 
 ```
 
 ```{r }
-# START YOUR CODE FOR GRAPH-1
+
+gg1 <- ggplot(longley, aes(Unemployed, GNP), col(longley$Unemployed))
+gg_plt1 <- gg1 + geom_point(size=6, color='blue')
+#print(gg_plt1)
+
+gg2 <- ggplot(longley, aes(Employed, GNP), col(longley$Employed))
+gg_plt2 <- gg2 + geom_point(size=6, color='green')
+
+require(gridExtra)
+grid.arrange(gg_plt1, gg_plt2, ncol=2)
 
 ```
 
 ```{r }
-# START YOUR CODE fFOR GRAPH-2
-
-```
-
-```{r }
-# START YOUR CODE FOR GRAPH-3
+new_column <- 
 
 ```
 
