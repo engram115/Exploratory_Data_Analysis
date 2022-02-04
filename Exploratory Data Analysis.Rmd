@@ -192,7 +192,30 @@ grid.arrange(gg_plt1, gg_plt2, ncol=2)
 ```
 
 ```{r }
-new_column <- 
+
+library(ggplot2)
+
+new_column <- c()
+for (k in seq_along(1:length(longley$Armed.Forces)))
+{
+  if (longley$Armed.Forces[k] > longley$Unemployed[k])
+  {
+    new_column <- c(new_column, 'Y')
+  }
+  else
+  {
+    new_column <- c(new_column, 'N')
+  }
+}
+
+longley$'Armed.Forces.Unemployed.Rel.' <- new_column
+
+
+  plt_a <- ggplot(longley, aes(Unemployed, Armed.Forces))
+  plt_b <- plt_a + geom_point(color='blue') + facet_grid(. ~ Armed.Forces.Unemployed.Rel.)
+  plt_c <- plt_b + ggtitle("Armed Forces - Unemployed") + 
+    xlab("Unemployed") + ylab("Armed Forces")
+  print(plt_c)
 
 ```
 
